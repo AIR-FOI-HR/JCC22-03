@@ -55,16 +55,25 @@ def region_of_interest(image):
     masked_image = cv2.bitwise_and(image, mask)
     return masked_image
 
+def output_image_with_lanes(lane_image, isImage):
+    canny_image = canny(lane_image)
+    cropped_image = region_of_interest(canny_image)
+    lines = cv2.HoughLinesP(cropped_image, 2, np.pi/180, 100, np.array([]), minLineLength=40, maxLineGap=5) #defining rows in pixels and radians to get a grid for Hough transformations and trying to find a bin with the most votes(lines corssing)
+    averaged_lines = average_slope_intercept(lane_image, lines)
+    line_image = display_lines(lane_image, averaged_lines)
+    output_image = cv2.addWeighted(lane_image, 0.8, line_image, 1, 1) #makes lane_image a bit darker -- 0.8 so 20% darker to better define lines
+    cv2.imshow("Image window", output_image)
+    if isImage:
+        cv2.waitKey(0)
+    else:
+        cv2.waitKey(1)
+    
 image = import_image('lane-recognition/materials/test_image.jpg')
 lane_image = np.copy(image)
-canny_image = canny(lane_image)
-cropped_image = region_of_interest(canny_image)
-lines = cv2.HoughLinesP(cropped_image, 2, np.pi/180, 100, np.array([]), minLineLength=40, maxLineGap=5) #defining rows in pixels and radians to get a grid for Hough transformations and trying to find a bin with the most votes(lines corssing)
-averaged_lines = average_slope_intercept(lane_image, lines)
-line_image = display_lines(lane_image, averaged_lines)
+#output_image_with_lanes(lane_image,True)
+cap = cv2.VideoCapture("lane-recognition/materials/test2.mp4")
 
-output_image = cv2.addWeighted(lane_image, 0.8, line_image, 1, 1) #makes lane_image a bit darker -- 0.8 so 20% darker to better define lines
-cv2.imshow("Image window", output_image)
-cv2.waitKey(0)
-
+while (cap.isOpened()):
+    _, frame = cap.read()
+    output_image_with_lanes(frame, False)
 
