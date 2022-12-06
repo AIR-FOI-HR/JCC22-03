@@ -55,7 +55,7 @@ def region_of_interest(image):
     masked_image = cv2.bitwise_and(image, mask)
     return masked_image
 
-def output_image_with_lanes(lane_image, isImage):
+def output_image_with_lanes(lane_image, isImage, captured_video=0):
     canny_image = canny(lane_image)
     cropped_image = region_of_interest(canny_image)
     lines = cv2.HoughLinesP(cropped_image, 2, np.pi/180, 100, np.array([]), minLineLength=40, maxLineGap=5) #defining rows in pixels and radians to get a grid for Hough transformations and trying to find a bin with the most votes(lines corssing)
@@ -66,14 +66,16 @@ def output_image_with_lanes(lane_image, isImage):
     if isImage:
         cv2.waitKey(0)
     else:
-        cv2.waitKey(1)
+        if cv2.waitKey(1) == ord('q'):
+            captured_video.release()#
+            captured_video.destroyAllWindows()
     
 image = import_image('lane-recognition/materials/test_image.jpg')
 lane_image = np.copy(image)
 #output_image_with_lanes(lane_image,True)
-cap = cv2.VideoCapture("lane-recognition/materials/test2.mp4")
+captured_video = cv2.VideoCapture("lane-recognition/materials/test2.mp4")
 
-while (cap.isOpened()):
-    _, frame = cap.read()
-    output_image_with_lanes(frame, False)
+while (captured_video.isOpened()):
+    _, frame = captured_video.read()
+    output_image_with_lanes(frame, False, captured_video)
 
