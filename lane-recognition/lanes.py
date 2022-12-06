@@ -35,7 +35,9 @@ canny_image = canny(lane_image)
 cropped_image = region_of_interest(canny_image)
 lines = cv2.HoughLinesP(cropped_image, 2, np.pi/180, 100, np.array([]), minLineLength=40, maxLineGap=5) #defining rows in pixels and radians to get a grid for Hough transformations and trying to find a bin with the most votes(lines corssing)
 line_image = display_lines(lane_image, lines)
-cv2.imshow("Image window", line_image)
+
+output_image = cv2.addWeighted(lane_image, 0.8, line_image, 1, 1) #makes lane_image a bit darker -- 0.8 so 20% darker to better define lines
+cv2.imshow("Image window", output_image)
 cv2.waitKey(0)
 
 
