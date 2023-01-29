@@ -1,3 +1,6 @@
+import tkinter as tk
+from tkinter import filedialog
+
 import cv2
 import matplotlib.pyplot as plt
 import numpy as np
@@ -69,11 +72,14 @@ def output_image_with_lanes(lane_image, isImage, captured_video=0):
         if cv2.waitKey(1) == ord('q'):
             captured_video.release()#
             captured_video.destroyAllWindows()
+            
+
     
 image = import_image('lane-recognition/materials/test_image.jpg')
 lane_image = np.copy(image)
 #output_image_with_lanes(lane_image,True)
 captured_video = cv2.VideoCapture("lane-recognition/materials/test2.mp4")
+
 
 while (captured_video.isOpened()):
     _, frame = captured_video.read()
