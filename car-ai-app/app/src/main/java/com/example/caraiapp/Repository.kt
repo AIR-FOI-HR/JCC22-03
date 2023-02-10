@@ -1,6 +1,5 @@
 package com.example.caraiapp
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.caraiapp.entities.Logs
 import com.google.firebase.database.DataSnapshot
