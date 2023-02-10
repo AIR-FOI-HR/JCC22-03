@@ -12,7 +12,8 @@ class LogsFeedItemHolder(parent: ViewGroup): RecyclerView.ViewHolder(LayoutInfla
 {
     private val binding = ViewHolderLogsItemBinding.bind(itemView)
     fun onBind(logFeedItem: Logs){
-        binding.logTimeTextView.text = logFeedItem.time
-        binding.logActionTextView.text = logFeedItem.action
+
+        binding.logTime = logFeedItem.time
+        binding.logAction = logFeedItem.action
     }
 }

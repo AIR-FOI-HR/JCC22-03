@@ -24,9 +24,9 @@ class LogsFeedRecyclerViewAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setItems(logFeedItems: List<Logs>){
+    fun setItems(logFeedItems: List<Logs>?){
         this.logFeedItems.clear()
-        this.logFeedItems.addAll(logFeedItems)
+        this.logFeedItems.addAll(logFeedItems ?: emptyList())
         notifyDataSetChanged()
     }
 }

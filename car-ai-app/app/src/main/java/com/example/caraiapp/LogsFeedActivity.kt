@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.caraiapp.databinding.ActivityLogsFeedBinding
 import com.example.caraiapp.recyclerview.LogsFeedRecyclerViewAdapter
 
-class MainActivity : AppCompatActivity() {
+class LogsFeedActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,8 +23,9 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.adapter = logsFeedAdapter
 
          viewModel.fetchLogsFeed()
-         viewModel.logsFeedLiveData.observe(this){logItems->
+         /*viewModel.logsFeedLiveData.observe(this){logItems->
              logsFeedAdapter.setItems(logItems)
-         }
+         }*/
     }
 }
+
