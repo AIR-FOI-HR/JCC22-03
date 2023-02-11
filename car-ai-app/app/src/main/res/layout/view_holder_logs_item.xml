@@ -33,6 +33,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Time here" />
 
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/logActionTextView"
                 android:layout_width="match_parent"
