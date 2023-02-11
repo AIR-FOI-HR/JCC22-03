@@ -52,4 +52,10 @@ dependencies {
 
     implementation platform('com.google.firebase:firebase-bom:31.2.0')
     implementation 'com.google.firebase:firebase-database-ktx'
+
+    def fragment_version = "1.5.5"
+    implementation "androidx.fragment:fragment-ktx:$fragment_version"
+
+    def activity_version = "1.6.1"
+    implementation "androidx.activity:activity-ktx:$activity_version"
 }

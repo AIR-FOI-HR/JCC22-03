@@ -8,13 +8,12 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
-class Repository {
+class FirebaseDAO : DAO {
 
     private val database = Firebase.database
-    private val carId = "car_id_1" //TODO: implement function to pass owned carId on login
     private val logFeedReference = database.getReference("logs")
 
-    fun fetchLogsFeed(liveData: MutableLiveData<List<Logs>>) {
+    override fun fetchLogsFeedByCarId(liveData: MutableLiveData<List<Logs>>, carId: String) {
         logFeedReference
             .orderByChild("carId")
             .equalTo(carId)
