@@ -18,9 +18,9 @@ class LogsFeedActivity : AppCompatActivity() {
         = DataBindingUtil.setContentView(this, R.layout.activity_logs_feed)
 
         //val viewModel: LogsFeedViewModel by viewModels { LogsFeedViewModel.Factory }
-        val viewModel : LogsFeedViewModel = ViewModelProvider(this)[LogsFeedViewModel::class.java]
-        //val repository = FirebaseDAO()
-        //val viewModel : LogsFeedViewModel = LogsFeedViewModel(repository)
+        //val viewModel : LogsFeedViewModel = ViewModelProvider(this)[LogsFeedViewModel::class.java]
+        val repository = FirebaseDAO()
+        val viewModel : LogsFeedViewModel = LogsFeedViewModel(repository)
 
         binding.lifecycleOwner = this
         binding.logsViewModel = viewModel
