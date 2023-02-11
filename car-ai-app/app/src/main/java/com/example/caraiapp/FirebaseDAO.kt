@@ -1,7 +1,8 @@
 package com.example.caraiapp
 
 import androidx.lifecycle.MutableLiveData
-import com.example.caraiapp.entities.Logs
+import com.example.database.DAO
+import com.example.database.entities.Logs
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -19,7 +20,7 @@ class FirebaseDAO : DAO {
             .equalTo(carId)
             .addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val logFeedItem: List<Logs> = snapshot.children.map {dataSnapshot ->
+                val logFeedItem: List<Logs> = snapshot.children.map { dataSnapshot ->
                     dataSnapshot.getValue(Logs::class.java)!!
                 }
                 //logFeedItem.sortedByDescending { it.time }

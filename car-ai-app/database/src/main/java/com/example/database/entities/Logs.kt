@@ -1,4 +1,4 @@
-package com.example.caraiapp.entities
+package com.example.database.entities
 
 data class Logs (
     val action: String = "",

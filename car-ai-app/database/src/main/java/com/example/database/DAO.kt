@@ -1,7 +1,7 @@
-package com.example.caraiapp
+package com.example.database
 
 import androidx.lifecycle.MutableLiveData
-import com.example.caraiapp.entities.Logs
+import com.example.database.entities.Logs
 
 interface DAO {
 
