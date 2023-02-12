@@ -6,9 +6,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.database.DAO
 import com.example.database.entities.Logs
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-
-class LogsFeedViewModel(private val repository: DAO) {
+@HiltViewModel
+class LogsFeedViewModel @Inject constructor(
+    private val repository: DAO
+    ): ViewModel() {
 //class LogsFeedViewModel : ViewModel() {
     //private val repository = FirebaseDAO()
     private val _logsFeedLiveData = MutableLiveData<List<Logs>>()
