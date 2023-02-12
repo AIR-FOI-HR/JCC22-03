@@ -19,7 +19,8 @@ class LogsFeedActivity : AppCompatActivity() {
 
         //val viewModel: LogsFeedViewModel by viewModels { LogsFeedViewModel.Factory }
         //val viewModel : LogsFeedViewModel = ViewModelProvider(this)[LogsFeedViewModel::class.java]
-        val repository = FirebaseDAO()
+        val databaseProvider = DatabaseProvider()
+        val repository = databaseProvider.provideDatabase()
         val viewModel : LogsFeedViewModel = LogsFeedViewModel(repository)
 
         binding.lifecycleOwner = this
