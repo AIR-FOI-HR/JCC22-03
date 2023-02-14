@@ -1,4 +1,4 @@
-package hr.foi.air.caraiapp
+package hr.foi.air.caraiapp.core
 
 import org.junit.Test
 

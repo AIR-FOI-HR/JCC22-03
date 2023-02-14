@@ -1,9 +1,8 @@
-package com.example.caraiapp
+package hr.foi.air.caraiapp
 
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.database.DAO
 import com.example.database.entities.Logs
 

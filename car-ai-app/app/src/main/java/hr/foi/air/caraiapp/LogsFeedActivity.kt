@@ -1,16 +1,14 @@
-package com.example.caraiapp
+package hr.foi.air.caraiapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
-import com.example.caraiapp.databinding.ActivityLogsFeedBinding
-import com.example.caraiapp.recyclerview.LogsFeedRecyclerViewAdapter
+import hr.foi.air.caraiapp.databinding.ActivityLogsFeedBinding
+import hr.foi.air.caraiapp.recyclerview.LogsFeedRecyclerViewAdapter
 
 
 class LogsFeedActivity : AppCompatActivity() {
-
+//val listLogFeed = listOf<LogFeed>(ListLogFeed(), ....)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

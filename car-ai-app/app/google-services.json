@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:483296175870:android:c497d175a0ceb5586be7af",
         "android_client_info": {
-          "package_name": "com.example.caraiapp"
+          "package_name": "hr.foi.air.caraiapp"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "483296175870-0r195tcc16mjgo545kall109tmjc93gh.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.caraiapp",
+            "package_name": "hr.foi.air.caraiapp",
             "certificate_hash": "df2be755abb5a028a3d9d6ec2efa9470b9e31ca5"
           }
         },

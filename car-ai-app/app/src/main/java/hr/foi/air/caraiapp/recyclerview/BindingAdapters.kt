@@ -1,4 +1,4 @@
-package com.example.caraiapp.recyclerview
+package hr.foi.air.caraiapp.recyclerview
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView

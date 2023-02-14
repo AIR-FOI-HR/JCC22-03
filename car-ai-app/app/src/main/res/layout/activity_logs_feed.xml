@@ -26,6 +26,6 @@
     <data>
         <variable
             name="logsViewModel"
-            type="com.example.caraiapp.LogsFeedViewModel" />
+            type="hr.foi.air.caraiapp.LogsFeedViewModel" />
     </data>
 </layout>

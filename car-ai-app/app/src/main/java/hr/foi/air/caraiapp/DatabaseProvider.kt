@@ -1,4 +1,4 @@
-package com.example.caraiapp
+package hr.foi.air.caraiapp
 
 import com.example.database.DAO
 
