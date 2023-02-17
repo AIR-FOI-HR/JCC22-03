@@ -1,10 +1,10 @@
-package com.example.caraiapp.recyclerview
+package hr.foi.air.caraiapp.recyclerview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.caraiapp.R
-import com.example.caraiapp.databinding.ViewHolderLogsItemBinding
+import hr.foi.air.caraiapp.R
+import hr.foi.air.caraiapp.databinding.ViewHolderLogsItemBinding
 import com.example.database.entities.Logs
 
 class LogsFeedItemHolder(parent: ViewGroup): RecyclerView.ViewHolder(LayoutInflater.from(parent.context)

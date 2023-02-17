@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 rootProject.name = "CarAIApp"
 include ':app'
 include ':database'
+include ':core'
