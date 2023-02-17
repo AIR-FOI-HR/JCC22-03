@@ -1,7 +1,7 @@
-package com.example.database
+package hr.foi.air.database
 
 import androidx.lifecycle.MutableLiveData
-import com.example.database.entities.Logs
+import hr.foi.air.database.entities.Logs
 
 interface DAO {
 

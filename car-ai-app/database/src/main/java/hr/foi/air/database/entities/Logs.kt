@@ -1,4 +1,4 @@
-package com.example.database.entities
+package hr.foi.air.database.entities
 
 data class Logs (
     val action: String = "",

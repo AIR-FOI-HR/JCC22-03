@@ -1,8 +1,7 @@
-package hr.foi.air.caraiapp
+package hr.foi.air.database
 
 import androidx.lifecycle.MutableLiveData
-import com.example.database.DAO
-import com.example.database.entities.Logs
+import hr.foi.air.database.entities.Logs
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener

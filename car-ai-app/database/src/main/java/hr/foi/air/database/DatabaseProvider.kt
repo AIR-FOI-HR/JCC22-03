@@ -1,6 +1,5 @@
-package hr.foi.air.caraiapp
+package hr.foi.air.database
 
-import com.example.database.DAO
 
 class DatabaseProvider {
 

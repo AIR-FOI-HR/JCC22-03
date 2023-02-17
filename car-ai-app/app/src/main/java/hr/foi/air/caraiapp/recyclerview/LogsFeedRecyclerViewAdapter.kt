@@ -3,7 +3,7 @@ package hr.foi.air.caraiapp.recyclerview
 import android.annotation.SuppressLint
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.database.entities.Logs
+import hr.foi.air.database.entities.Logs
 
 class LogsFeedRecyclerViewAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>()
 {

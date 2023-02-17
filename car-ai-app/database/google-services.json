@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:483296175870:android:c497d175a0ceb5586be7af",
         "android_client_info": {
-          "package_name": "hr.foi.air.caraiapp"
+          "package_name": "com.example.caraiapp"
         }
       },
       "oauth_client": [
@@ -18,10 +18,39 @@
           "client_id": "483296175870-0r195tcc16mjgo545kall109tmjc93gh.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "hr.foi.air.caraiapp",
+            "package_name": "com.example.caraiapp",
             "certificate_hash": "df2be755abb5a028a3d9d6ec2efa9470b9e31ca5"
           }
         },
+        {
+          "client_id": "483296175870-757io775a39jpkeorqglucb2is2ue05g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAeDCgRX4hVSN_PJfu_YdeS9FTbbtIQ3jo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "483296175870-757io775a39jpkeorqglucb2is2ue05g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:483296175870:android:0a130520352355a96be7af",
+        "android_client_info": {
+          "package_name": "hr.foi.air.database"
+        }
+      },
+      "oauth_client": [
         {
           "client_id": "483296175870-757io775a39jpkeorqglucb2is2ue05g.apps.googleusercontent.com",
           "client_type": 3

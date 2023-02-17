@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import hr.foi.air.caraiapp.databinding.ActivityLogsFeedBinding
 import hr.foi.air.caraiapp.recyclerview.LogsFeedRecyclerViewAdapter
+import hr.foi.air.database.DatabaseProvider
 
 
 class LogsFeedActivity : AppCompatActivity() {

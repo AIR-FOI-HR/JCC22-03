@@ -1,4 +1,4 @@
-package com.example.database
+package hr.foi.air.database
 
 import org.junit.Test
 

@@ -3,8 +3,8 @@ package hr.foi.air.caraiapp
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.database.DAO
-import com.example.database.entities.Logs
+import hr.foi.air.database.DAO
+import hr.foi.air.database.entities.Logs
 
 
 class LogsFeedViewModel(private val repository: DAO) {
