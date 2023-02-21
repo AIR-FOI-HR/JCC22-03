@@ -2,17 +2,32 @@ package hr.foi.air.caraiapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
+import com.google.android.material.navigation.NavigationView
 import hr.foi.air.caraiapp.databinding.ActivityLogsFeedBinding
+import hr.foi.air.caraiapp.fragments.LogsFeedRecyclerViewFragment
 import hr.foi.air.caraiapp.recyclerview.LogsFeedRecyclerViewAdapter
 import hr.foi.air.database.DatabaseProvider
 
 
-class LogsFeedActivity : AppCompatActivity() {
+class LogsFeedActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 //val listLogFeed = listOf<LogFeed>(ListLogFeed(), ....)
+    private var currentFragment : LogsFeedRecyclerViewFragment? = null
+    private lateinit var binding : ActivityLogsFeedBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        binding = ActivityLogsFeedBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+
+        initializeLayout()
+        showRecyclerViewFragment()
+
+     /*
         val binding: ActivityLogsFeedBinding
         = DataBindingUtil.setContentView(this, R.layout.activity_logs_feed)
 
@@ -32,6 +47,43 @@ class LogsFeedActivity : AppCompatActivity() {
          /*viewModel.logsFeedLiveData.observe(this){logItems->
              logsFeedAdapter.setItems(logItems)
          }*/
+         */
+
+    }
+
+    private fun initializeLayout() {
+        binding.layoutMain.toolbar.setTitleTextColor(getColor(R.color.white))
+        setSupportActionBar(binding.layoutMain.toolbar)
+        val drawerToggle = ActionBarDrawerToggle(
+            this,
+            binding.drawerLayout,
+            binding.layoutMain.toolbar,
+            R.string.navigation_drawer_open, R.string.navigation_drawer_close
+        )
+        binding.drawerLayout.addDrawerListener(drawerToggle)
+        drawerToggle.syncState()
+
+        binding.navView.setNavigationItemSelectedListener(this)
+    }
+
+
+    private fun showRecyclerViewFragment() {
+
+        currentFragment = LogsFeedRecyclerViewFragment()
+        supportFragmentManager.beginTransaction()
+            .replace(binding.layoutMain.contentMain.mainFragment.id, currentFragment!!)
+            .commit()
+    }
+
+    override fun onBackPressed() {
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START))
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+        else
+            super.onBackPressed()
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        TODO("Not yet implemented")
     }
 }
 
