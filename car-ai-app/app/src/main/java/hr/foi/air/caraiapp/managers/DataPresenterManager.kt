@@ -1,6 +1,7 @@
 package hr.foi.air.caraiapp.managers
 
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.navigation.NavigationView
@@ -54,6 +55,7 @@ class DataPresenterManager private constructor(){
             .setCheckable(true)
             .setOnMenuItemClickListener {
                 showDataPresenter(dataPresenter)
+                drawerLayout.closeDrawer(GravityCompat.START)
                 true
             }
     }
@@ -63,7 +65,7 @@ class DataPresenterManager private constructor(){
             .beginTransaction()
             .replace(R.id.main_fragment,dataPresenter.getFragment())
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            .addToBackStack("")
+            //.addToBackStack("")
             .commit()
 
         //add setdata if needed
