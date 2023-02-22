@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import com.google.android.material.navigation.NavigationView
 import hr.foi.air.caraiapp.databinding.ActivityLogsFeedBinding
 import hr.foi.air.caraiapp.fragments.LogsFeedRecyclerViewFragment
+import hr.foi.air.caraiapp.managers.DataPresenterManager
 import hr.foi.air.caraiapp.recyclerview.LogsFeedRecyclerViewAdapter
 import hr.foi.air.database.DatabaseProvider
 
@@ -25,7 +26,9 @@ class LogsFeedActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         setContentView(view)
 
         initializeLayout()
-        showRecyclerViewFragment()
+        initializeDataPresenterManager()
+
+       // loadDataToFragment()
 
      /*
         val binding: ActivityLogsFeedBinding
@@ -51,6 +54,13 @@ class LogsFeedActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
     }
 
+    private fun initializeDataPresenterManager() {
+        DataPresenterManager.getInstance()
+            .setDependencies(this,binding.navView,binding.drawerLayout)
+            .initializeDataPresenters()
+            .showMainDataPresenter()
+    }
+
     private fun initializeLayout() {
         binding.layoutMain.toolbar.setTitleTextColor(getColor(R.color.white))
         setSupportActionBar(binding.layoutMain.toolbar)
@@ -64,15 +74,6 @@ class LogsFeedActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         drawerToggle.syncState()
 
         binding.navView.setNavigationItemSelectedListener(this)
-    }
-
-
-    private fun showRecyclerViewFragment() {
-
-        currentFragment = LogsFeedRecyclerViewFragment()
-        supportFragmentManager.beginTransaction()
-            .replace(binding.layoutMain.contentMain.mainFragment.id, currentFragment!!)
-            .commit()
     }
 
     override fun onBackPressed() {
