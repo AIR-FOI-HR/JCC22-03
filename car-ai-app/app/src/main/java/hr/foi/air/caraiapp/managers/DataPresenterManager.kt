@@ -36,7 +36,7 @@ class DataPresenterManager private constructor(){
     fun initializeDataPresenters() : DataPresenterManager
     {
         addDataPresenter(LogsFeedRecyclerViewFragment())
-        //addDataPresenter(LogsFeedRecyclerViewFragment())
+        addDataPresenter(LogsFeedRecyclerViewFragment())
         return this
     }
 
@@ -61,13 +61,15 @@ class DataPresenterManager private constructor(){
     }
 
     private fun showDataPresenter(dataPresenter: DataPresenter) {
-        activity.supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.main_fragment,dataPresenter.getFragment())
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            //.addToBackStack("")
-            .commit()
 
+        if(activity.supportFragmentManager.findFragmentById(dataPresenter.getFragment().id) == null){
+            activity.supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.main_fragment,dataPresenter.getFragment())
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .addToBackStack("")
+                .commit()
+        }
         //add setdata if needed
     }
     fun showMainDataPresenter(){
