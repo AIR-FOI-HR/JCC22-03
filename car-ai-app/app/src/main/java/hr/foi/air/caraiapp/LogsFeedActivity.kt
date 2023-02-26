@@ -3,6 +3,7 @@ package hr.foi.air.caraiapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
@@ -57,7 +58,10 @@ class LogsFeedActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        TODO("Not yet implemented")
+        if(item.itemId == R.id.menu_about){
+            Toast.makeText(this, "JCC - Marko Mušica, Karlo Gardijan, Josipa Meštrović", Toast.LENGTH_SHORT).show()
+        }
+        return true
     }
 }
 
