@@ -32,11 +32,9 @@ android {
         jvmTarget = '1.8'
     }
 
-    buildFeatures{
-        dataBinding = true
+    buildFeatures {
         viewBinding = true
     }
-
 }
 
 dependencies {
@@ -56,6 +54,4 @@ dependencies {
 
     def activity_version = "1.6.1"
     implementation "androidx.activity:activity-ktx:$activity_version"
-
-
 }

@@ -1,21 +1,19 @@
 package hr.foi.air.caraiapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
 import hr.foi.air.caraiapp.databinding.ActivityLogsFeedBinding
-import hr.foi.air.caraiapp.fragments.LogsFeedRecyclerViewFragment
 import hr.foi.air.caraiapp.managers.DataPresenterManager
-
 
 class LogsFeedActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    private var currentFragment : LogsFeedRecyclerViewFragment? = null
-    private lateinit var binding : ActivityLogsFeedBinding
+    private lateinit var binding: ActivityLogsFeedBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -25,12 +23,11 @@ class LogsFeedActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
         initializeLayout()
         initializeDataPresenterManager()
-
     }
 
     private fun initializeDataPresenterManager() {
-        DataPresenterManager.getInstance()
-            .setDependencies(this,binding.navView,binding.drawerLayout)
+        DataPresenterManager
+            .setDependencies(this, binding.navView, binding.drawerLayout)
             .initializeDataPresenters()
             .showMainDataPresenter()
     }
@@ -58,10 +55,13 @@ class LogsFeedActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == R.id.menu_about){
-            Toast.makeText(this, "JCC - Marko Mušica, Karlo Gardijan, Josipa Meštrović", Toast.LENGTH_SHORT).show()
+        if (item.itemId == R.id.menu_about) {
+            Toast.makeText(
+                this,
+                "JCC - Marko Mušica, Karlo Gardijan, Josipa Meštrović",
+                Toast.LENGTH_SHORT
+            ).show()
         }
         return true
     }
 }
-

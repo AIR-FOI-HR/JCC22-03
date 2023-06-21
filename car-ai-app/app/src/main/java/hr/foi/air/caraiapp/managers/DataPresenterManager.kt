@@ -9,34 +9,27 @@ import hr.foi.air.caraiapp.R
 import hr.foi.air.caraiapp.core.DataPresenter
 import hr.foi.air.caraiapp.fragments.LogsFeedRecyclerViewFragment
 
-//SINGLETON CLASS
-class DataPresenterManager private constructor(){
-    companion object
-    {
-        private var instance : DataPresenterManager = DataPresenterManager()
-        fun getInstance() : DataPresenterManager {
-            return instance
-        }
-    }
-    private var dataPresenters : ArrayList<DataPresenter> = ArrayList()
-    private lateinit var activity : AppCompatActivity
-    private lateinit var navView : NavigationView
-    private lateinit var drawerLayout : DrawerLayout
+object DataPresenterManager {
 
+    private var dataPresenters: ArrayList<DataPresenter> = ArrayList()
+    private lateinit var activity: AppCompatActivity
+    private lateinit var navView: NavigationView
+    private lateinit var drawerLayout: DrawerLayout
 
-    fun setDependencies(activity: AppCompatActivity, navView: NavigationView, drawerLayout: DrawerLayout)
-    : DataPresenterManager
-    {
+    fun setDependencies(
+        activity: AppCompatActivity,
+        navView: NavigationView,
+        drawerLayout: DrawerLayout,
+    ): DataPresenterManager {
         this.activity = activity
         this.navView = navView
         this.drawerLayout = drawerLayout
 
         return this
     }
-    fun initializeDataPresenters() : DataPresenterManager
-    {
+
+    fun initializeDataPresenters(): DataPresenterManager {
         addDataPresenter(LogsFeedRecyclerViewFragment())
-        //addDataPresenter(LogsFeedRecyclerViewFragment())
         return this
     }
 
@@ -50,7 +43,7 @@ class DataPresenterManager private constructor(){
         val id = dataPresenters.indexOf(dataPresenter)
 
         navView.menu
-            .add(R.id.dynamic_group, id, id+1, dataPresenter.getName(context))
+            .add(R.id.dynamic_group, id, id + 1, dataPresenter.getName(context))
             .setIcon(dataPresenter.getIcon(context))
             .setCheckable(true)
             .setOnMenuItemClickListener {
@@ -61,17 +54,17 @@ class DataPresenterManager private constructor(){
     }
 
     private fun showDataPresenter(dataPresenter: DataPresenter) {
-        if(activity.supportFragmentManager.findFragmentById(dataPresenter.getFragment().id) == null){
+        if (activity.supportFragmentManager.findFragmentById(dataPresenter.getFragment().id) == null) {
             activity.supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.main_fragment,dataPresenter.getFragment())
+                .replace(R.id.main_fragment, dataPresenter.getFragment())
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .addToBackStack("")
                 .commit()
         }
-        //add setdata if needed
     }
-    fun showMainDataPresenter(){
+
+    fun showMainDataPresenter() {
         showDataPresenter(dataPresenters[0])
     }
 }

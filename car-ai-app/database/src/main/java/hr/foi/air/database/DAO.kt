@@ -1,9 +1,9 @@
 package hr.foi.air.database
 
 import androidx.lifecycle.MutableLiveData
-import hr.foi.air.database.entities.Logs
+import hr.foi.air.database.entities.LogsFeed
 
 interface DAO {
 
-    fun fetchLogsFeedByCarId(liveData: MutableLiveData<List<Logs>>, carId: String)
+    fun fetchLogsFeedByCarId(liveData: MutableLiveData<List<LogsFeed>>, carId: String)
 }

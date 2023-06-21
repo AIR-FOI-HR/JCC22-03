@@ -1,6 +1,6 @@
 package hr.foi.air.database.entities
 
-data class Logs (
+data class LogsFeed(
     val action: String = "",
     val carId: String = "",
     val time: String = ""
