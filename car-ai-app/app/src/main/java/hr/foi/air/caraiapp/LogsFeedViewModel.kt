@@ -3,18 +3,17 @@ package hr.foi.air.caraiapp
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import hr.foi.air.database.DAO
-import hr.foi.air.database.entities.Logs
+import androidx.lifecycle.ViewModel
+import hr.foi.air.database.FirebaseRepository
+import hr.foi.air.database.entities.LogsFeed
 
 
-class LogsFeedViewModel(private val repository: DAO) {
-//class LogsFeedViewModel : ViewModel() {
-    //private val repository = FirebaseDAO()
-    private val _logsFeedLiveData = MutableLiveData<List<Logs>>()
-    val logsFeedLiveData: LiveData<List<Logs>> = _logsFeedLiveData
+class LogsFeedViewModel : ViewModel() {
 
-    fun fetchLogsFeedByCarId(carId: String){
-        repository.fetchLogsFeedByCarId(_logsFeedLiveData, carId)
+    private val _logsFeedLiveData = MutableLiveData<List<LogsFeed>>()
+    val logsFeedLiveData: LiveData<List<LogsFeed>> = _logsFeedLiveData
+
+    fun fetchLogsFeedByCarId(carId: String) {
+        FirebaseRepository.fetchLogsFeedByCarId(_logsFeedLiveData, carId)
     }
-
 }
