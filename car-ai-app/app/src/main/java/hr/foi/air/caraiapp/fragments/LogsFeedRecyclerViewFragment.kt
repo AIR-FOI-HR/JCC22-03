@@ -6,6 +6,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -37,17 +40,40 @@ class LogsFeedRecyclerViewFragment : Fragment(), DataPresenter {
         setupObservers()
         setupUi()
 
-        viewModel.fetchLogsFeedByCarId("car_id_1")
+        viewModel.fetchCarOwners("mmusica")
     }
 
     private fun setupObservers() {
         viewModel.logsFeedLiveData.observe(viewLifecycleOwner) { logItems ->
             logsFeedAdapter.submitList(logItems)
+            binding.recyclerView.scrollToPosition(logsFeedAdapter.itemCount)
+        }
+        viewModel.carOwnersLiveData.observe(viewLifecycleOwner) { carOwners ->
+            viewModel.fetchCars(carOwners)
+        }
+        viewModel.carsLiveData.observe(viewLifecycleOwner) { cars ->
+            binding.spinner.setupAdapterAndListener(titles = cars.map { it.name })
         }
     }
 
     private fun setupUi() {
         binding.recyclerView.adapter = logsFeedAdapter
+    }
+
+    private fun Spinner.setupAdapterAndListener(titles: List<String>) {
+        adapter = ArrayAdapter(
+            context,
+            android.R.layout.simple_spinner_dropdown_item,
+            titles,
+        )
+        setSelection(selectedItemPosition)
+
+        onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) =
+                viewModel.onCarSelected(parent?.getItemAtPosition(position) as String)
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
     }
 
     override fun getIcon(context: Context): Drawable {
