@@ -1,12 +1,3 @@
 <resources>
     <string name="app_name">CarAIApp</string>
-    <string name="menu_about">About app</string>
-    <string name="menu_list">List view</string>
-    <string name="menu_logs">Live Logs</string>
-    <string name="menu_additional">Additional</string>
-    <string name="header_title">CarAIApp</string>
-    <string name="navigation_drawer_open">Open drawer</string>
-    <string name="navigation_drawer_close">Close drawer</string>
-    <string name="logs_recycler_view_presenter">Recycler view</string>
-    <string name="cars_dropdown_prompt">Choose Car</string>
 </resources>
