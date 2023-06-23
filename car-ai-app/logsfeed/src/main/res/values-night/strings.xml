@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="hello_username">Hello %s!</string>
     <string name="menu_about">About app</string>
+    <string name="menu_logout">Logout</string>
     <string name="menu_list">List view</string>
     <string name="menu_logs">Live Logs</string>
     <string name="menu_additional">Additional</string>

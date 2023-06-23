@@ -16,4 +16,5 @@ rootProject.name = "CarAIApp"
 include ':app'
 include ':database'
 include ':core'
+include ':authentication'
 include ':logsfeed'
