@@ -4,14 +4,8 @@
     <application>
         <activity
             android:name=".ui.LogsFeedActivity"
-            android:exported="true"
-            android:theme="@style/Theme.CarAIApp.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false"
+            android:theme="@style/Theme.CarAIApp.NoActionBar" />
     </application>
 
 </manifest>

@@ -13,6 +13,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import hr.foi.air.caraiapp.core.DataPresenter
+import hr.foi.air.caraiapp.core.getLoggedInUser
 import hr.foi.air.caraiapp.logsfeed.R
 import hr.foi.air.caraiapp.logsfeed.databinding.FragmentRecyclerViewBinding
 import hr.foi.air.caraiapp.logsfeed.ui.adapters.LogsFeedRecyclerViewAdapter
@@ -40,7 +41,7 @@ class LogsFeedRecyclerViewFragment : Fragment(), DataPresenter {
         setupObservers()
         setupUi()
 
-        viewModel.fetchCarOwners("mmusica")
+        viewModel.fetchCarOwners(activity?.getLoggedInUser().orEmpty())
     }
 
     private fun setupObservers() {

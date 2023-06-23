@@ -10,6 +10,8 @@ import com.google.firebase.ktx.Firebase
 import hr.foi.air.database.entities.Car
 import hr.foi.air.database.entities.CarOwner
 import hr.foi.air.database.entities.LogsFeed
+import hr.foi.air.database.entities.User
+import hr.foi.air.database.entities.UserData
 
 object FirebaseRepository : DAO {
 
@@ -17,6 +19,7 @@ object FirebaseRepository : DAO {
     private val logFeedReference = database.reference.child("logs")
     private val carOwnersReference = database.reference.child("carOwners")
     private val carsReference = database.reference.child("cars")
+    private val usersReference = database.reference.child("users")
 
     override fun fetchLogsFeedByCarId(
         liveData: MutableLiveData<List<LogsFeed>>,
@@ -65,7 +68,37 @@ object FirebaseRepository : DAO {
             .child(carId)
             .get()
             .addOnSuccessListener {
-            onSuccess(it.getValue(Car::class.java)!!)
-        }.addOnFailureListener { it.printStackTrace() }
+                onSuccess(it.getValue(Car::class.java)!!)
+            }.addOnFailureListener { it.printStackTrace() }
+    }
+
+    override fun signInUser(
+        username: String,
+        password: String,
+        onSuccess: (User) -> Unit,
+        onFailure: (userExists: Boolean) -> Unit,
+    ) {
+        usersReference
+            .child(username)
+            .get()
+            .addOnSuccessListener {
+                val user = it.getValue(User::class.java) ?: return@addOnSuccessListener onFailure(false)
+                if (user.password == password) {
+                    onSuccess(user)
+                } else {
+                    onFailure(true)
+                }
+            }.addOnFailureListener { onFailure(false) }
+    }
+
+    override fun registerUser(userData: UserData, onSuccess: () -> Unit, onFailure: () -> Unit) {
+        usersReference.child(userData.username).setValue(
+            User(
+                email = userData.email,
+                name = userData.name,
+                password = userData.password,
+                surname = userData.surname,
+            )
+        ).addOnSuccessListener { onSuccess() }.addOnFailureListener { onFailure() }
     }
 }

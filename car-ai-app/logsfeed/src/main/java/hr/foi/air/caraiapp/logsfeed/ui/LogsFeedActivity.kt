@@ -1,13 +1,17 @@
 package hr.foi.air.caraiapp.logsfeed.ui
 
 import hr.foi.air.caraiapp.core.R as coreR
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
+import hr.foi.air.caraiapp.core.getLoggedInUser
+import hr.foi.air.caraiapp.core.saveUser
 import hr.foi.air.caraiapp.logsfeed.R
 import hr.foi.air.caraiapp.logsfeed.databinding.ActivityLogsFeedBinding
 import hr.foi.air.caraiapp.logsfeed.managers.DataPresenterManager
@@ -32,6 +36,11 @@ class LogsFeedActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
             .setDependencies(this, binding.navView, binding.drawerLayout)
             .initializeDataPresenters()
             .showMainDataPresenter()
+
+        binding.navView
+            .getHeaderView(0)
+            .findViewById<TextView>(R.id.hello_username)
+            .text = getString(R.string.hello_username, getLoggedInUser().orEmpty())
     }
 
     private fun initializeLayout() {
@@ -57,12 +66,19 @@ class LogsFeedActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu_about) {
-            Toast.makeText(
-                this,
-                "JCC - Marko Mušica, Karlo Gardijan, Josipa Meštrović",
-                Toast.LENGTH_SHORT
-            ).show()
+        when(item.itemId) {
+            R.id.menu_log_out -> {
+                saveUser(username = null)
+                startActivity(Intent("hr.foi.air.caraiapp.authentication.ui.open").setPackage(this.packageName))
+                finish()
+            }
+            R.id.menu_about -> {
+                Toast.makeText(
+                    this,
+                    "JCC - Marko Mušica, Karlo Gardijan, Josipa Meštrović",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
         return true
     }

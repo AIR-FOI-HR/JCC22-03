@@ -2,16 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group
         android:id="@+id/dynamic_group"
-        android:orderInCategory="0"
-        android:checkableBehavior="single">
-
+        android:checkableBehavior="single"
+        android:orderInCategory="0">
     </group>
     <group
         android:id="@+id/additional_group"
-        android:orderInCategory="100"
-        android:checkableBehavior="none">
+        android:checkableBehavior="none"
+        android:orderInCategory="100">
         <item android:title="@string/menu_additional">
             <menu>
+                <item
+                    android:id="@+id/menu_log_out"
+                    android:icon="@drawable/ic_logout"
+                    android:title="@string/menu_logout" />
                 <item
                     android:id="@+id/menu_about"
                     android:icon="@android:drawable/ic_menu_info_details"
