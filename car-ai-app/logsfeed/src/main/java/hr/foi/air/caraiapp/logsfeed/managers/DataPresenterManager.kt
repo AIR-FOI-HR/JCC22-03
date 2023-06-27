@@ -30,6 +30,7 @@ object DataPresenterManager {
 
     fun initializeDataPresenters(): DataPresenterManager {
         addDataPresenter(LogsFeedRecyclerViewFragment())
+        addDataPresenter(LogsFeedRecyclerViewFragment())
         return this
     }
 
