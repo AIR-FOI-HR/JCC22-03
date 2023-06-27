@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    app:cardBackgroundColor="?colorSurface"
+    app:strokeColor="?colorOnSurface"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/log_time_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/viewHolderColor"
+            android:padding="12dp"
+            android:textColor="?colorOnPrimary"
+            android:textSize="18sp"
+            tools:text="Time here" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/log_action_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:textColor="?colorOnSurface"
+            android:textSize="14sp"
+            tools:text="Log Activity here" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
