@@ -44,7 +44,7 @@ class LogsFeedRecyclerViewFragment : Fragment(), DataPresenter {
 
         //setupObservers()
         setupUi()
-       //todo setData(viewModel.logsFeedLiveData, viewModel.carOwnersLiveData, );
+        setData(viewModel.logsFeedLiveData, viewModel.carOwnersLiveData, viewModel.carsLiveData);
         viewModel.fetchCarOwners(activity?.getLoggedInUser().orEmpty())
     }
 
@@ -97,7 +97,7 @@ class LogsFeedRecyclerViewFragment : Fragment(), DataPresenter {
     override fun setData(
         logsFeedData: LiveData<List<LogsFeed>>,
         carOwnersLiveData: LiveData<List<CarOwner>>,
-        carsLiveData: LiveData<List<hr.foi.air.database.entities.Car>>
+        carsLiveData: LiveData<List<Car>>
     ) {
         logsFeedData.observe(viewLifecycleOwner) { logItems ->
             logsFeedAdapter.submitList(logItems)

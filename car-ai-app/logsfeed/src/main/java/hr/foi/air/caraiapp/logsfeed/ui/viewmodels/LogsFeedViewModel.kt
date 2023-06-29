@@ -3,10 +3,12 @@ package hr.foi.air.caraiapp.logsfeed.ui.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import hr.foi.air.caraiapp.logsfeed.models.Car
+
 import hr.foi.air.database.FirebaseRepository
 import hr.foi.air.database.entities.CarOwner
 import hr.foi.air.database.entities.LogsFeed
+import hr.foi.air.database.entities.Car
+
 
 class LogsFeedViewModel : ViewModel() {
 
@@ -25,12 +27,12 @@ class LogsFeedViewModel : ViewModel() {
             username = username,
         )
     }
-
+    //cars.add(Car(id = carOwner.carId, carName = carEntity.carName))
     fun fetchCars(carOwners: List<CarOwner>) {
         val cars = mutableListOf<Car>()
         carOwners.forEachIndexed { index, carOwner ->
             FirebaseRepository.fetchCarById(carId = carOwner.carId) { carEntity ->
-                cars.add(Car(id = carOwner.carId, name = carEntity.carName))
+                cars.add(Car(id = carOwner.carId,carName = carEntity.carName))
                 if (index == carOwners.size - 1) {
                     _carsLiveData.postValue(cars)
                 }
@@ -40,7 +42,7 @@ class LogsFeedViewModel : ViewModel() {
 
     fun onCarSelected(carName: String) {
         _carsLiveData.value?.let {
-            val car = it.firstOrNull() { it.name == carName } ?: return@let
+            val car = it.firstOrNull() { it.carName == carName } ?: return@let
             fetchLogsFeedByCarId(carId = car.id)
         }
     }
