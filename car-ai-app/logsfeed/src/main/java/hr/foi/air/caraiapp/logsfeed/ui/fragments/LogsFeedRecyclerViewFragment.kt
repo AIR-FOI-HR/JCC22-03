@@ -19,6 +19,8 @@ import hr.foi.air.caraiapp.logsfeed.R
 import hr.foi.air.caraiapp.logsfeed.databinding.FragmentRecyclerViewBinding
 import hr.foi.air.caraiapp.logsfeed.ui.adapters.LogsFeedRecyclerViewAdapter
 import hr.foi.air.caraiapp.logsfeed.ui.viewmodels.LogsFeedViewModel
+import hr.foi.air.database.DAO
+import hr.foi.air.database.FirebaseRepository
 import hr.foi.air.database.entities.Car
 import hr.foi.air.database.entities.CarOwner
 import hr.foi.air.database.entities.LogsFeed
@@ -27,7 +29,7 @@ class LogsFeedRecyclerViewFragment : Fragment(), DataPresenter {
 
     private val viewModel: LogsFeedViewModel by viewModels()
     private val logsFeedAdapter = LogsFeedRecyclerViewAdapter()
-
+    private lateinit var repository: DAO
     private lateinit var binding: FragmentRecyclerViewBinding
 
     override fun onCreateView(
@@ -43,9 +45,10 @@ class LogsFeedRecyclerViewFragment : Fragment(), DataPresenter {
         super.onViewCreated(view, savedInstanceState)
 
         //setupObservers()
+        setRepository(FirebaseRepository)
         setupUi()
         setData(viewModel.logsFeedLiveData, viewModel.carOwnersLiveData, viewModel.carsLiveData);
-        viewModel.fetchCarOwners(activity?.getLoggedInUser().orEmpty())
+        viewModel.fetchCarOwners(activity?.getLoggedInUser().orEmpty(),repository)
     }
 
    /*
@@ -104,10 +107,14 @@ class LogsFeedRecyclerViewFragment : Fragment(), DataPresenter {
             binding.recyclerView.scrollToPosition(logsFeedAdapter.itemCount)
         }
         carOwnersLiveData.observe(viewLifecycleOwner) { carOwners ->
-            viewModel.fetchCars(carOwners)
+            viewModel.fetchCars(carOwners, repository)
         }
         carsLiveData.observe(viewLifecycleOwner) { cars : List<Car> ->
             binding.spinner.setupAdapterAndListener(titles = cars.map { it.carName })
         }
+    }
+
+    override fun setRepository(repository: DAO) {
+        this.repository = repository
     }
 }
