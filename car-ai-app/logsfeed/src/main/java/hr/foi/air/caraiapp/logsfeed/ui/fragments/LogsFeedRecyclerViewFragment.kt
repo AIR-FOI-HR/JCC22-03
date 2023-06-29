@@ -12,12 +12,16 @@ import android.widget.Spinner
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.LiveData
 import hr.foi.air.caraiapp.core.DataPresenter
 import hr.foi.air.caraiapp.core.getLoggedInUser
 import hr.foi.air.caraiapp.logsfeed.R
 import hr.foi.air.caraiapp.logsfeed.databinding.FragmentRecyclerViewBinding
 import hr.foi.air.caraiapp.logsfeed.ui.adapters.LogsFeedRecyclerViewAdapter
 import hr.foi.air.caraiapp.logsfeed.ui.viewmodels.LogsFeedViewModel
+import hr.foi.air.database.entities.Car
+import hr.foi.air.database.entities.CarOwner
+import hr.foi.air.database.entities.LogsFeed
 
 class LogsFeedRecyclerViewFragment : Fragment(), DataPresenter {
 
@@ -38,12 +42,13 @@ class LogsFeedRecyclerViewFragment : Fragment(), DataPresenter {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupObservers()
+        //setupObservers()
         setupUi()
-
+        setData(viewModel.logsFeedLiveData, viewModel.carOwnersLiveData, viewModel.carsLiveData);
         viewModel.fetchCarOwners(activity?.getLoggedInUser().orEmpty())
     }
 
+   /*
     private fun setupObservers() {
         viewModel.logsFeedLiveData.observe(viewLifecycleOwner) { logItems ->
             logsFeedAdapter.submitList(logItems)
@@ -55,7 +60,7 @@ class LogsFeedRecyclerViewFragment : Fragment(), DataPresenter {
         viewModel.carsLiveData.observe(viewLifecycleOwner) { cars ->
             binding.spinner.setupAdapterAndListener(titles = cars.map { it.name })
         }
-    }
+    }*/
 
     private fun setupUi() {
         binding.recyclerView.adapter = logsFeedAdapter
@@ -87,5 +92,22 @@ class LogsFeedRecyclerViewFragment : Fragment(), DataPresenter {
 
     override fun getFragment(): Fragment {
         return this
+    }
+
+    override fun setData(
+        logsFeedData: LiveData<List<LogsFeed>>,
+        carOwnersLiveData: LiveData<List<CarOwner>>,
+        carsLiveData: LiveData<List<Car>>
+    ) {
+        logsFeedData.observe(viewLifecycleOwner) { logItems ->
+            logsFeedAdapter.submitList(logItems)
+            binding.recyclerView.scrollToPosition(logsFeedAdapter.itemCount)
+        }
+        carOwnersLiveData.observe(viewLifecycleOwner) { carOwners ->
+            viewModel.fetchCars(carOwners)
+        }
+        carsLiveData.observe(viewLifecycleOwner) { cars : List<Car> ->
+            binding.spinner.setupAdapterAndListener(titles = cars.map { it.carName })
+        }
     }
 }
