@@ -30,10 +30,10 @@ object FirebaseRepository : DAO {
             .equalTo(carId)
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val logFeedItem: List<LogsFeed> = snapshot.children.map { dataSnapshot ->
+                    var logFeedItem = snapshot.children.map { dataSnapshot ->
                         dataSnapshot.getValue(LogsFeed::class.java)!!
                     }
-                    //logFeedItem.sortedByDescending { it.time }
+                    logFeedItem = logFeedItem.sortedBy { it.time }
                     //Log.i("Logs", logFeedItem.toString())
                     liveData.postValue(logFeedItem)
                 }
