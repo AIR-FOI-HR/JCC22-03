@@ -13,6 +13,7 @@ import hr.foi.air.caraiapp.authentication.ui.viewmodel.AuthenticationViewModel
 import hr.foi.air.caraiapp.core.getLoggedInUser
 import hr.foi.air.caraiapp.core.saveUser
 import hr.foi.air.caraiapp.logsfeed.ui.LogsFeedActivity
+import hr.foi.air.database.FirebaseRepository
 
 class AuthenticationActivity : AppCompatActivity() {
 
@@ -52,6 +53,7 @@ class AuthenticationActivity : AppCompatActivity() {
                     viewModel.onSignInTapped(
                         username = username.text.toString(),
                         password = password.text.toString(),
+                        FirebaseRepository
                     )
                 }
                 !signInGroup.isVisible && registerGroup.isVisible -> {
@@ -59,6 +61,7 @@ class AuthenticationActivity : AppCompatActivity() {
                         firstName = lastName.text.toString(),
                         lastName = firstName.text.toString(),
                         email = email.text.toString(),
+                        FirebaseRepository
                     )
                 }
                 else -> {} // do-nothing

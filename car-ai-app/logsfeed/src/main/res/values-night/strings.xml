@@ -11,4 +11,8 @@
     <string name="navigation_drawer_close">Close drawer</string>
     <string name="logs_recycler_view_presenter">Recycler view</string>
     <string name="cars_dropdown_prompt">Choose Car</string>
+
+    <string name="logs_console_view_presenter">Console view</string>
+    <string name="logs_are_empty">Logs are empty!</string>
+    <string name="log_template">[%s]: %s</string>
 </resources>
