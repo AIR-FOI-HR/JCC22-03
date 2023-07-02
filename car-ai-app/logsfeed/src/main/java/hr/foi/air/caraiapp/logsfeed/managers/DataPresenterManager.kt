@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.navigation.NavigationView
 import hr.foi.air.caraiapp.core.DataPresenter
 import hr.foi.air.caraiapp.logsfeed.R
+import hr.foi.air.caraiapp.logsfeed.ui.fragments.LogsFeedConsoleViewFragment
 import hr.foi.air.caraiapp.logsfeed.ui.fragments.LogsFeedRecyclerViewFragment
 
 object DataPresenterManager {
@@ -30,7 +31,7 @@ object DataPresenterManager {
 
     fun initializeDataPresenters(): DataPresenterManager {
         addDataPresenter(LogsFeedRecyclerViewFragment())
-        addDataPresenter(LogsFeedRecyclerViewFragment())
+        addDataPresenter(LogsFeedConsoleViewFragment())
         return this
     }
 

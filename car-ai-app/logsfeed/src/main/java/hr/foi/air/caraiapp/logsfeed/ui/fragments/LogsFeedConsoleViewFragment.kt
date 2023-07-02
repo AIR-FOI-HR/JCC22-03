@@ -16,8 +16,7 @@ import androidx.lifecycle.LiveData
 import hr.foi.air.caraiapp.core.DataPresenter
 import hr.foi.air.caraiapp.core.getLoggedInUser
 import hr.foi.air.caraiapp.logsfeed.R
-import hr.foi.air.caraiapp.logsfeed.databinding.FragmentRecyclerViewBinding
-import hr.foi.air.caraiapp.logsfeed.ui.adapters.LogsFeedRecyclerViewAdapter
+import hr.foi.air.caraiapp.logsfeed.databinding.FragmentConsoleViewBinding
 import hr.foi.air.caraiapp.logsfeed.ui.viewmodels.LogsFeedViewModel
 import hr.foi.air.database.DAO
 import hr.foi.air.database.FirebaseRepository
@@ -25,48 +24,28 @@ import hr.foi.air.database.entities.Car
 import hr.foi.air.database.entities.CarOwner
 import hr.foi.air.database.entities.LogsFeed
 
-class LogsFeedRecyclerViewFragment : Fragment(), DataPresenter {
+class LogsFeedConsoleViewFragment : Fragment(), DataPresenter {
 
     private val viewModel: LogsFeedViewModel by viewModels()
-    private val logsFeedAdapter = LogsFeedRecyclerViewAdapter()
+
     private lateinit var repository: DAO
-    private lateinit var binding: FragmentRecyclerViewBinding
+    private lateinit var binding: FragmentConsoleViewBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = FragmentRecyclerViewBinding.inflate(inflater, container, false)
+        binding = FragmentConsoleViewBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //setupObservers()
         setRepository(FirebaseRepository)
-        setupUi()
         setData(viewModel.logsFeedLiveData, viewModel.carOwnersLiveData, viewModel.carsLiveData);
         viewModel.fetchCarOwners(activity?.getLoggedInUser().orEmpty(),repository)
-    }
-
-   /*
-    private fun setupObservers() {
-        viewModel.logsFeedLiveData.observe(viewLifecycleOwner) { logItems ->
-            logsFeedAdapter.submitList(logItems)
-            binding.recyclerView.scrollToPosition(logsFeedAdapter.itemCount)
-        }
-        viewModel.carOwnersLiveData.observe(viewLifecycleOwner) { carOwners ->
-            viewModel.fetchCars(carOwners)
-        }
-        viewModel.carsLiveData.observe(viewLifecycleOwner) { cars ->
-            binding.spinner.setupAdapterAndListener(titles = cars.map { it.name })
-        }
-    }*/
-
-    private fun setupUi() {
-        binding.recyclerView.adapter = logsFeedAdapter
     }
 
     private fun Spinner.setupAdapterAndListener(titles: List<String>) {
@@ -85,17 +64,12 @@ class LogsFeedRecyclerViewFragment : Fragment(), DataPresenter {
         }
     }
 
-    override fun getIcon(context: Context): Drawable {
-        return AppCompatResources.getDrawable(context, android.R.drawable.ic_media_play)!!
-    }
+    override fun getIcon(context: Context): Drawable =
+        AppCompatResources.getDrawable(context, android.R.drawable.ic_media_next)!!
 
-    override fun getName(context: Context): String {
-        return context.getString(R.string.logs_recycler_view_presenter)
-    }
+    override fun getName(context: Context) = context.getString(R.string.logs_console_view_presenter)
 
-    override fun getFragment(): Fragment {
-        return this
-    }
+    override fun getFragment(): Fragment = this
 
     override fun setData(
         logsFeedData: LiveData<List<LogsFeed>>,
@@ -103,8 +77,11 @@ class LogsFeedRecyclerViewFragment : Fragment(), DataPresenter {
         carsLiveData: LiveData<List<Car>>
     ) {
         logsFeedData.observe(viewLifecycleOwner) { logItems ->
-            logsFeedAdapter.submitList(logItems)
-            binding.recyclerView.scrollToPosition(logsFeedAdapter.itemCount)
+            val logText = logItems.map { logItem ->
+                getString(R.string.log_template, logItem.time, logItem.action)
+            }.joinToString(separator = "\n")
+
+            binding.console.setText(logText)
         }
         carOwnersLiveData.observe(viewLifecycleOwner) { carOwners ->
             viewModel.fetchCars(carOwners, repository)
